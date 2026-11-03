@@ -1,6 +1,6 @@
 const hero = {
     nome: "",
-    vida: 10,
+    vida: 100,
     veneno: 0,
     sorte: 0,
     inventario: []

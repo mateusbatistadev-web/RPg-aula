@@ -2,8 +2,10 @@
 // A trilha do farol · jogo de demonstração do Jovem Tech
 const prompt = require("prompt-sync")();
 const hero = require("./hero");
+const Sorte = require("./Sorte")
+const vila = require("../regioes/vilas")
 
-// ===== CONTROLE DO JOGO =====
+
 let local = "vila";
 let jogando = true;
 const TESTE = false;
@@ -17,7 +19,6 @@ console.log(hero.nome + ", o farol da costa apagou. Alguém precisa chegar lá a
 
 while (jogando) {
 
-  // A cada passo, o veneno tira 1 de vida
   if (hero.veneno > 0) {
     hero.vida = hero.vida - 1;
     hero.veneno = hero.veneno - 1;
@@ -28,36 +29,15 @@ while (jogando) {
     console.log("Você caiu no caminho. Fim de jogo.");
     jogando = false;
 
-  } else if (local === "vila") {
-
-    console.log("");
-    console.log("[VILA] Um velho pescador te entrega uma moeda furada: 'Não vale nada. Guarde mesmo assim.'");
-
-    if (hero.inventario.includes("moeda furada") === false) {
-      hero.inventario.push("moeda furada");
-    }
-
-    console.log("1 - ir para a floresta   2 - ir para o poço");
-    let escolha = prompt("> ");
-
-    if (escolha === "1") {
-      local = "floresta";
-    } else if (escolha === "2") {
-      local = "poco";
-    }
-
-  } else if (local === "floresta") {
+  } 
+   
+  } if (local === "floresta") {
 
     console.log("");
     console.log("[FLORESTA] Galhos fechados. Algo se mexe no chão.");
 
-    let sorte = Math.random();
 
-    if (TESTE) {
-      sorte = 0.2;
-    }
-
-    if (sorte < 0.4) {
+    if (Sorte(0.4)) {
       console.log("Uma aranha te morde! Você está envenenado por 3 passos.");
       hero.veneno = 3;
     } else {
@@ -132,4 +112,3 @@ while (jogando) {
 
     jogando = false;
   }
-}
