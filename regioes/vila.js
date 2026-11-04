@@ -1,6 +1,6 @@
 const prompt = require("prompt-sync")() 
 
-function vila (heroi){
+function vila (hero){
  console.log("");
     console.log("[VILA] Um velho pescador te entrega uma moeda furada: 'Não vale nada. Guarde mesmo assim.'");
 
@@ -12,9 +12,9 @@ function vila (heroi){
     let escolha = prompt("> ");
 
     if (escolha === "1") {
-      local = "floresta";
+      return "floresta";
     } else if (escolha === "2") {
-      local = "poco";
+      return "poco";
     }
   }
 
