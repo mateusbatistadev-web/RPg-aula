@@ -2,6 +2,7 @@
 // A trilha do farol · jogo de demonstração do Jovem Tech
 const prompt = require("prompt-sync")();
 const hero = require("./hero");
+const vila = require("../regioes/vila")
 
 // ===== CONTROLE DO JOGO =====
 let local = "vila";
@@ -28,10 +29,7 @@ while (jogando) {
     console.log("Você caiu no caminho. Fim de jogo.");
     jogando = false;
 
-  } else if (local === "vila") {
-
-    console.log("");
-    console.log("[VILA] Um velho pescador te entrega uma moeda furada: 'Não vale nada. Guarde mesmo assim.'");
+  } 
 
     if (hero.inventario.includes("moeda furada") === false) {
       hero.inventario.push("moeda furada");
@@ -46,7 +44,7 @@ while (jogando) {
       local = "poco";
     }
 
-  } else if (local === "floresta") {
+  }  if (local === "floresta") {
 
     console.log("");
     console.log("[FLORESTA] Galhos fechados. Algo se mexe no chão.");
@@ -132,4 +130,4 @@ while (jogando) {
 
     jogando = false;
   }
-}
+
