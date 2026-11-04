@@ -2,6 +2,10 @@
 // A trilha do farol · jogo de demonstração do Jovem Tech
 const prompt = require("prompt-sync")();
 const hero = require("./hero");
+const vila = require("./regioes/vila");
+const floresta = require("./regioes/floresta");
+const sorte = require("./rpg_aula.js/Sorte")
+const poco = require("./regioes/poco")
 
 // ===== CONTROLE DO JOGO =====
 let local = "vila";
@@ -28,10 +32,12 @@ while (jogando) {
     console.log("Você caiu no caminho. Fim de jogo.");
     jogando = false;
 
-  } else if (local === "vila") {
+  } 
+  if (local === "vila") {
+  local = vila(hero)
+  } else if (local === "poco") {
+  local = floresta(hero)
 
-    console.log("");
-    console.log("[VILA] Um velho pescador te entrega uma moeda furada: 'Não vale nada. Guarde mesmo assim.'");
 
     if (hero.inventario.includes("moeda furada") === false) {
       hero.inventario.push("moeda furada");
@@ -46,43 +52,13 @@ while (jogando) {
       local = "poco";
     }
 
-  } else if (local === "floresta") {
-
-    console.log("");
-    console.log("[FLORESTA] Galhos fechados. Algo se mexe no chão.");
-
-    let sorte = Math.random();
-
-    if (TESTE) {
-      sorte = 0.2;
-    }
-
-    if (sorte < 0.4) {
-      console.log("Uma aranha te morde! Você está envenenado por 3 passos.");
-      hero.veneno = 3;
-    } else {
-      console.log("Era só o vento.");
-    }
-
-    console.log("1 - seguir para a ponte   2 - voltar para a vila");
-    let escolha = prompt("> ");
-
-    if (escolha === "1") {
-      local = "ponte";
-    } else if (escolha === "2") {
-      local = "vila";
-    }
+  }  if (local === "floresta") {
+    local = floresta(hero)
+  
 
   } else if (local === "poco") {
-
-    console.log("");
-    console.log("[POÇO] Um poço antigo. Não dá para ver o fundo.");
-
-    console.log("1 - voltar para a vila   2 - beber água (recupera 3 de vida)");
-
-    if (hero.inventario.includes("moeda furada")) {
-      console.log("3 - jogar a moeda furada no poço");
-    }
+   local = poco(hero)
+  
 
     let escolha = prompt("> ");
 
@@ -131,5 +107,4 @@ while (jogando) {
     console.log("Fim: " + hero.nome + " salvou a costa com " + hero.vida + " de vida.");
 
     jogando = false;
-  }
-}
+  }}
